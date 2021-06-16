@@ -1,0 +1,42 @@
+<div class="container">
+	
+<%  if @customer %>
+	<h4><%= link_to(@customer.username, account_access_menu_path(@customer)) %></h4>
+<% end %>
+
+<h4><%= link_to("Cart", cart_index_path) %></h4>
+
+<h3>Shipping Address</h3>
+<div class="form_group">
+	<p><%= @customer.full_name %></p>
+	<p><%= @customer.address.address %></p>
+	<p><%= @customer.address.city.city %></p>
+	<p><%= @customer.address.postal_code %></p>		
+</div>
+
+<h3>Payment Information:</h3>
+	<% if @customer.customer_payment_info %>
+		<p><%= @customer.customer_payment_info.card_number %></p>
+	<% else %>
+		<p><%= @customer.first_name %></p>
+	<% end %>
+
+<h3>Order Summary:</h3>
+
+<h3><%= @customer_session %></h3>
+
+<h3><%= @film_session %></h3>
+
+<table class="table">
+		<% @hash.each do |film, amount| %>
+			<tr>
+				<td><%= film.title %></td>
+				<td>$<%= film.rental_rate %></td>
+				<td><%= amount %></td>
+				<td>$<%= film.rental_rate * amount  %></td>
+			</tr>
+		<% end %>
+</table>
+
+
+</div>

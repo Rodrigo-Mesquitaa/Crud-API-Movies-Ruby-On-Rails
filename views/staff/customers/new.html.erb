@@ -1,0 +1,49 @@
+<div class="container">
+
+<% @customers_page = 'Customers Edit Page' #refers in layout/staff.html.erb %>
+
+<ul class="nav">
+	<li><%= link_to("Back to Customers", staff_customers_path) %></li>
+</ul>
+
+<%= form_for [:staff, @customer] do |c| %>
+	<div class="form-group">
+		<label>First Name</label>
+		<%= c.text_field(:first_name, class: 'form-control') %>
+	</div>
+	<div class="form-group">
+		<label>Last Name</label>
+		<%= c.text_field(:last_name, class: 'form-control') %>
+	</div>
+	<div class="form-group">
+		<label>Store ID</label>
+		<%= c.select(:store_id, 1..2, class: 'form-control') %>
+	</div>
+	
+	<div class="form-group">
+		<label>Address</label>
+		<%= c.fields_for @address do |a| %>
+		<%= a.text_field :address, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<label>Address 2</label>
+		<%= a.text_field :address2, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<label>District</label>
+		<%= a.text_field :district, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<label>City ID</label>
+		<%= a.number_field :city_id, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<label>Postal Code</label>
+		<%= a.text_field :postal_code, class: 'form-control' %>
+	</div>
+		<% end %>
+
+<%= c.submit class: 'btn btn-warning' %>
+<% end %>
+
+</div>

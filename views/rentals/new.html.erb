@@ -1,0 +1,56 @@
+<div class="container">
+	
+<%  if @customer %>
+	<h4><%= link_to(@customer.username, account_access_menu_path(@customer)) %></h4>
+<% end %>
+
+<h4><%= link_to("Cart", cart_index_path) %></h4>
+
+<h5><%= link_to("Rent more movies", root_path) %></h5>
+
+<h3>Shipping Address</h3>
+<div class="form_group">
+	<p><%= @customer.full_name %></p>
+	<p><%= @customer.address.address %></p>
+	<p><%= @customer.address.city.city %></p>
+	<p><%= @customer.address.postal_code %></p>		
+</div>
+
+<h3>Payment Information:</h3>
+	<p><%= @customer.customer_payment_info.card_number %></p>
+
+<h3>Order Summary:</h3>
+
+
+<table class="table">
+	<th>Film Name</th>
+	<th>Rental Rate</th>
+	<th>Quantity</th>
+	<th>Amount</th>
+	
+	<% total = 0 %>
+	<% @hash.each do |film, amount| %>
+		<tr>
+			<td><%= film.title %></td>
+			<td>$<%= film.rental_rate %></td>
+			<td><%= amount %></td>
+			<td>$<%= dollars = film.rental_rate * amount  %></td>
+					<% total += dollars	%>
+		</tr>
+	<% end %>
+		<tr>
+			<td>TOTAL</td>
+			<td></td>
+			<td></td>
+			<td>$<%= total %></td>
+		</tr>
+
+
+</table>
+
+	<%= form_for @pending_process do |r| %>
+		<%= r.submit("Place Order", class: 'btn btn-primary btn-block') %>
+	<% end %>
+
+
+</div>

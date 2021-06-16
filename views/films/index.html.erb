@@ -1,0 +1,23 @@
+<div class="container">
+
+	<h4><%= link_to(@customer.username, account_access_menu_path(@customer)) %></h4>
+	
+	<h2>Rented Movies</h2>
+	
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<tr>
+			<th>#</th>
+			<th>Movie Name</th>
+			<th>Rental Date</th>
+		</tr>
+		<% n = 0 %>
+		<% @rented_films.each do |film| %>
+			<tr>
+				<td><%= n += 1 %></td>
+				<td><%= film.title %></td>
+				<td><%#= film.rental.rental_date  %></td>
+			</tr>
+		<% end %>
+	</table>
+
+</div>
